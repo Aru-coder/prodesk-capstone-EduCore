@@ -527,7 +527,7 @@ The design will include both desktop and mobile-responsive layouts.
 
 ### Figma Design
 
-**Figma Link:** `TODO — Add public Figma link`
+**Figma Link:** [View EduCore UI/UX Design](https://www.figma.com/design/Z7H28Twa76rnkSiLAq62dK/EduCore-%E2%80%94-Enterprise-LMS-UI-UX?node-id=0-1&t=9pVOVRuaaimb4Wv4-1)
 
 # Planned Dashboards
 
