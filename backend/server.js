@@ -3,10 +3,23 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+
+// Authentication routes
+app.use("/api/auth", authRoutes);
+
+// Test route
+app.get("/", (req, res) => {
+  res.json({
+    message: "EduCore Sprint 14 Auth API is running",
+  });
+});
 
 // MongoDB connection
 mongoose
@@ -18,13 +31,7 @@ mongoose
     console.error("MongoDB connection failed:", error.message);
   });
 
-// Test route
-app.get("/", (req, res) => {
-  res.json({
-    message: "EduCore Sprint 14 Auth API is running",
-  });
-});
-
+// Start server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
