@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../services/authService";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,16 +21,12 @@ function Register() {
     try {
       const data = await registerUser(name, email, password);
 
-      // Store JWT
       localStorage.setItem("token", data.token);
-
-      // Store user information
       localStorage.setItem("user", JSON.stringify(data.user));
 
       console.log("Registration successful:", data);
 
-      alert("Account created successfully!");
-
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -39,7 +37,6 @@ function Register() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-
         <h1>EduCore</h1>
 
         <p className="subtitle">
@@ -55,7 +52,6 @@ function Register() {
         )}
 
         <form onSubmit={handleSubmit}>
-
           <div className="form-group">
             <label>Name</label>
 
@@ -96,14 +92,12 @@ function Register() {
           <button type="submit" disabled={loading}>
             {loading ? "Creating account..." : "Create Account"}
           </button>
-
         </form>
 
         <p className="switch-text">
           Already have an account?{" "}
           <Link to="/login">Login</Link>
         </p>
-
       </div>
     </div>
   );

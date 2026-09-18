@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,16 +20,12 @@ function Login() {
     try {
       const data = await loginUser(email, password);
 
-      // Store JWT
       localStorage.setItem("token", data.token);
-
-      // Store user information
       localStorage.setItem("user", JSON.stringify(data.user));
 
       console.log("Login successful:", data);
 
-      alert("Login successful!");
-
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -38,7 +36,6 @@ function Login() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-
         <h1>EduCore</h1>
 
         <p className="subtitle">
@@ -54,7 +51,6 @@ function Login() {
         )}
 
         <form onSubmit={handleSubmit}>
-
           <div className="form-group">
             <label>Email</label>
 
@@ -82,14 +78,12 @@ function Login() {
           <button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
-
         </form>
 
         <p className="switch-text">
           Don't have an account?{" "}
           <Link to="/register">Register</Link>
         </p>
-
       </div>
     </div>
   );
