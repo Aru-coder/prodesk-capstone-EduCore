@@ -8,6 +8,8 @@ import {
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import CourseDetail from "./pages/CourseDetail";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -15,35 +17,21 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Public routes */}
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/courses/:id" element={<CourseDetail />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
         </Route>
 
         {/* Default route */}
-        <Route
-          path="/"
-          element={<Navigate to="/login" replace />}
-        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
 
         {/* Unknown routes */}
-        <Route
-          path="*"
-          element={<Navigate to="/login" replace />}
-        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );

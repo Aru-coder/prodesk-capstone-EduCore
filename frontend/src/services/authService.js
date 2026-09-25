@@ -23,7 +23,7 @@ export const loginUser = async (email, password) => {
 };
 
 // Register user
-export const registerUser = async (name, email, password) => {
+export const registerUser = async (name, email, password, role = "student") => {
   const response = await fetch(`${API_URL}/register`, {
     method: "POST",
     headers: {
@@ -33,6 +33,7 @@ export const registerUser = async (name, email, password) => {
       name,
       email,
       password,
+      role,
     }),
   });
 
